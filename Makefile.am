@@ -84,10 +84,7 @@ endif
 
 
 # Targets
-test: integ
-
-integ: all
-	py.test integ/
+test: all
 
 sdist: clean
 	mkdir -vp /tmp/statsite-@STATSITE_VERSION@
