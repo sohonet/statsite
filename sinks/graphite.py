@@ -156,7 +156,7 @@ class GraphiteStore(object):
         for _ in range(self.attempts):
             if self.sock:
                 try:
-                    self.sock.sendall(metric)
+                    self.sock.sendall(metric.encode())
                     return
                 except socket.error:
                     self.logger.exception("Error while flushing to graphite. Reattempting...")
