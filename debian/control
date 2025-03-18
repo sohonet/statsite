@@ -2,8 +2,14 @@ Source: statsite
 Maintainer: John Keates <john@keates.nl>
 Section: misc
 Priority: optional
-Standards-Version: 3.9.2
-Build-Depends: debhelper (>= 9), dh-systemd, dh-autoreconf, dh-systemd, pkg-config, netcat, lsof
+Standards-Version: 4.6.2
+Build-Depends: debhelper-compat (= 13),
+               pkg-config,
+               netcat,
+               lsof,
+               autoconf,
+               automake,
+               libtool
 
 Package: statsite
 Architecture: any

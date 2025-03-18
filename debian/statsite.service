@@ -1,12 +1,24 @@
 [Unit]
 Description=Statsite metrics aggregation server
 Documentation=man:statsite https://github.com/statsite
+After=network.target
 
 [Service]
+Type=simple
 User=statsite
 Group=statsite
 ExecStart=/usr/bin/statsite -f /etc/statsite/statsite.conf
 Restart=on-failure
+RestartSec=30s
+
+# Hardening
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+ReadOnlyDirectories=/
+ReadWriteDirectories=/var/log/statsite
+ReadWriteDirectories=/var/run/statsite
 
 [Install]
 WantedBy=multi-user.target

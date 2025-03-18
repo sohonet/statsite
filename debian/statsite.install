@@ -1,1 +1,2 @@
-debian/conf/statsite.conf etc/statsite
+debian/conf/statsite.conf etc/statsite/
+sinks/*.py usr/share/statsite/sinks/

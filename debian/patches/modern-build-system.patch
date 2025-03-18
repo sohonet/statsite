@@ -1,0 +1,8 @@
+# Update configure.ac to handle modern build systems
+--- a/deps/check-0.10.0/configure.ac
++++ b/deps/check-0.10.0/configure.ac
+# Add proper compiler flag handling
+AC_USE_SYSTEM_EXTENSIONS
+AX_CFLAGS_WARN_ALL
+# Add hardening flags support
+AC_SUBST([CFLAGS_HARDENING], ["-fstack-protector-strong -Wformat -Werror=format-security"])

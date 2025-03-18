@@ -1,9 +1,12 @@
 #!/bin/sh
 set -e
 
-#DEBHELPER#
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    # Clean up byte-compiled Python files
+    rm -f /usr/share/statsite/sinks/*.pyc
+    rm -f /usr/share/statsite/sinks/__pycache__/*.pyc
+fi
 
-# byte-compiled Python libraries cleanup
-rm -f /usr/share/statsite/sinks/*.pyc
+#DEBHELPER#
 
 exit 0

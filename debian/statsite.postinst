@@ -1,27 +1,29 @@
-#! /bin/sh
-# postinst script for statsite
-#
-
+#!/bin/sh
 set -e
 
 if [ "$1" = "configure" ]; then
+    # Create system user if it doesn't exist
+    if ! getent passwd statsite >/dev/null 2>&1 ; then
+        adduser --quiet \
+                --system \
+                --group \
+                --no-create-home \
+                --home /nonexistent \
+                --shell /usr/sbin/nologin \
+                --gecos "Statsite metrics daemon" \
+                statsite
+    fi
 
-	if ! getent passwd -- statsite >/dev/null 2>&1 ; then
-	adduser --home /nonexistent \
-		--group \
-		--system \
-		--disabled-password \
-		--no-create-home \
-		--gecos "statsite daemon user" \
-		statsite
-	fi
+    # Create required directories
+    install -d -m 755 -o statsite -g statsite /var/log/statsite
+    install -d -m 755 -o statsite -g statsite /var/run/statsite
 
-	# Ensure configuration files are readable by the dedicated statsite user.
-	chgrp -R statsite /etc/statsite
-
-	# For upgrades: Ensure configuration files are not world-readable.
-	find /etc/statsite -perm -o+r -type f -exec chmod 640 '{}' \;
-
+    # Ensure configuration files are readable by the dedicated statsite user
+    if [ -d /etc/statsite ]; then
+        chown -R root:statsite /etc/statsite
+        find /etc/statsite -type f -exec chmod 640 {} \;
+        find /etc/statsite -type d -exec chmod 750 {} \;
+    fi
 fi
 
 #DEBHELPER#
