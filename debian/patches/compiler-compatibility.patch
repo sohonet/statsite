@@ -1,6 +1,0 @@
-# Fix warnings with modern GCC
---- a/deps/check-0.10.0/src/check.h
-+++ b/deps/check-0.10.0/src/check.h
-# Add proper includes
-#include <stdint.h>
-#include <stdbool.h>
