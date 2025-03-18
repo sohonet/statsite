@@ -1,27 +1,25 @@
 Description: Update configure.ac to handle modern build systems
 Author: Jason Pereira <jason.pereira@sohonet.com>
 Last-Update: 2024-03-18
+Forwarded: no
 
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1,6 +1,6 @@
- #                                               -*- Autoconf -*-
+@@ -2,7 +2,7 @@
  # Process this file with autoconf to produce a configure script.
--AC_PREREQ([2.68])
-+AC_PREREQ([2.71])
- AC_INIT([statsite], [0.8.1], [armon@armon.me])
- AM_INIT_AUTOMAKE([1.11 -Wall -Werror foreign subdir-objects])
- AC_CONFIG_SRCDIR([src/statsite.c])
-@@ -14,6 +14,10 @@
- AC_PROG_CC
- AC_PROG_LIBTOOL
 
-+# Add proper compiler flag handling
-+AC_USE_SYSTEM_EXTENSIONS
-+
+ ## Set the version in both instances below here:
+-AC_INIT([Statsite], [0.8.1])
++AC_INIT([statsite], [0.8.1], [armon@armon.me])
+
+ STATSITE_MAJOR_VERSION=0
+ STATSITE_MINOR_VERSION=8
+@@ -16,6 +16,9 @@
+ # place where extra autoconf macros are kept
+ AC_CONFIG_MACRO_DIR([m4])
+
 +# Add hardening flags support
 +CFLAGS="$CFLAGS -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
 +
- # Checks for libraries.
- AC_CHECK_LIB([m], [floor], ,AC_MSG_ERROR([Requires libm]))
--
+ # define things like _GNU_SOURCE appropriately
+ AC_USE_SYSTEM_EXTENSIONS
