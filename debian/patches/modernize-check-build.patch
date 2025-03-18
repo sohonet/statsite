@@ -1,25 +1,25 @@
-Description: Update check's configure.ac to handle modern build systems
+Description: Update configure.ac to handle modern build systems
 Author: Jason Pereira <jason.pereira@sohonet.com>
 Last-Update: 2024-03-18
 Forwarded: no
 
---- a/deps/check-0.10.0/configure.ac
-+++ b/deps/check-0.10.0/configure.ac
+--- a/configure.ac
++++ b/configure.ac
 @@ -2,7 +2,7 @@
  # Process this file with autoconf to produce a configure script.
 
- # Prelude.
--AC_PREREQ([2.59])
-+AC_PREREQ([2.71])
+ ## Set the version in both instances below here:
+-AC_INIT([Statsite], [0.8.1])
++AC_INIT([statsite], [0.8.1], [armon@armon.me])
 
- AC_INIT([Check], [0.10.0], [check-devel at lists dot sourceforge dot net])
- CHECK_MAJOR_VERSION=0
-@@ -19,6 +19,9 @@
- # place to put some extra build scripts installed
- AC_CONFIG_AUX_DIR([build-aux])
+ STATSITE_MAJOR_VERSION=0
+ STATSITE_MINOR_VERSION=8
+@@ -16,6 +16,9 @@
+ # place where extra autoconf macros are kept
+ AC_CONFIG_MACRO_DIR([m4])
 
-+# Add hardening flags
++# Add hardening flags support
 +CFLAGS="$CFLAGS -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
 +
- # really severe build strictness
- AM_INIT_AUTOMAKE([-Wall gnits 1.11.2])
+ # define things like _GNU_SOURCE appropriately
+ AC_USE_SYSTEM_EXTENSIONS
